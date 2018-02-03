@@ -10,6 +10,10 @@ if [ $INSTALL_TYPE = "i" ]; then
 	apt-get install -y build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 libboost-all-dev git
 	apt-get install -y libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
 
+	#Stop service if already running
+	service p2pool stop
+	service vertcoind stop
+
 	#Vertcoin Install
 	cd /usr/src
 	rm -rf /usr/src/vertcoin
@@ -40,8 +44,9 @@ if [ $INSTALL_TYPE = "i" ]; then
 	echo "vertcoin:${VERTCOIN_USER_PASSWORD}" | sudo chpasswd
 
 	#Configure vertcoin
+	rm -rf /home/vertcoin/.vertcoin
+	rm -rf /home/vertcoin/.vertcoin
 	mkdir /home/vertcoin/.vertcoin
-	rm /home/vertcoin/.vertcoin/vertcoin.conf
 	echo 'daemon=1' >> /home/vertcoin/.vertcoin/vertcoin.conf
 	echo 'server=1' >> /home/vertcoin/.vertcoin/vertcoin.conf
 	echo 'gen=0' >> /home/vertcoin/.vertcoin/vertcoin.conf
