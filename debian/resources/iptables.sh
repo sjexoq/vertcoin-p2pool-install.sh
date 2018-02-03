@@ -28,7 +28,6 @@ ip6tables -A INPUT -p tcp --dport 9171 -j ACCEPT
 ip6tables -A INPUT -p tcp --dport 9181 -j ACCEPT
 ip6tables -A INPUT -p tcp --dport 9346 -j ACCEPT
 ip6tables -A INPUT -p tcp --dport 9347 -j ACCEPT
-ip6tables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
 ip6tables -P INPUT DROP
 ip6tables -P FORWARD DROP
 ip6tables -P OUTPUT ACCEPT
