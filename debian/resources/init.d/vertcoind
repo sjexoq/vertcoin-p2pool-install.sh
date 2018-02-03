@@ -1,0 +1,29 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          vertcoind
+# Required-Start:    $local_fs $remote_fs $network $time
+# Required-Stop:     $local_fs $remote_fs $network $time
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: vertcoind
+### END INIT INFO
+start() {
+        echo "starting vertcoind"
+        /sbin/runuser -l vertcoin -c '/usr/bin/screen -L -S vertcoind -m -d /usr/bin/vertcoind --server -printtoconsole'
+        sleep 5
+        echo "vertcoind started with PID of $(ps fax | grep vertcoind | grep -v grep | head -1 | awk '{print $1}')"
+        echo "started vertcoind ["$(tput setaf 2)OK$(tput sgr0)"]"
+}
+stop() {
+        echo "stopping vertcoind"
+        /sbin/runuser -l vertcoin -c '/usr/bin/screen -X -S vertcoind quit'
+        sleep 2
+        echo "vertcoind stopped ["$(tput setaf 2)OK$(tput sgr0)"]"
+}
+case "$1" in
+        start) start ;;
+        stop)  stop;;
+        *) echo "usage $0 start|stop" >&2
+                exit 1
+                ;;
+esac
