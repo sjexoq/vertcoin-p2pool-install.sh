@@ -16,4 +16,5 @@ Once installation has completed, make a note of any passwords and directories.
 Donations
 --------------------------------------
 SJExoQ: VTC VjWdJU5DwPQnent5sZdkwwdvHPTNLX7Wa6
+
 Vertcoin: VTC 1HNeqi3pJRNvXybNX4FKzZgYJsdTSqJTbk
