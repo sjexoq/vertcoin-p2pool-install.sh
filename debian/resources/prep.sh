@@ -82,14 +82,14 @@ if [ $INSTALL_TYPE = "i" ]; then
 	touch /etc/init.d/vertcoind
 	chmod a+x /etc/init.d/vertcoind
 	update-rc.d vertcoind defaults 
-	cp resources/init.d/vertcoind /etc/init.d/vertcoind
+	cp cp /usr/src/vertcoin-p2pool-install.sh/resources/init.d/vertcoind /etc/init.d/vertcoind
 
 	#P2pool service
 	rm /etc/init.d/p2pool
 	touch /etc/init.d/p2pool
 	chmod a+x /etc/init.d/p2pool
 	update-rc.d p2pool defaults 
-	cp resources/init.d/p2pool /etc/init.d/p2pool
+	cp cp /usr/src/vertcoin-p2pool-install.sh/resources/init.d/p2pool /etc/init.d/p2pool
 	sed -i "s/MAX_CONNS_TO_REPLACE/${MAX_CONNS_TO_REPLACE}/" /etc/init.d/p2pool
 	sed -i "s/OUTGOING_CONNS_TO_REPLACE/${OUTGOING_CONNS_TO_REPLACE}/" /etc/init.d/p2pool
 	sed -i "s/NETWORK_TO_REPLACE/${NETWORK_TO_REPLACE}/" /etc/init.d/p2pool
