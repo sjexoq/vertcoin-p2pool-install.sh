@@ -107,6 +107,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 	sed -i "s/DONATION_TO_REPLACE/${DONATION_TO_REPLACE}/" /etc/init.d/p2pool
 	chown vertcoin:vertcoin -R /usr/src/p2pool-vtc
 	chown vertcoin:vertcoin -R /usr/bin/vertcoind
+	chown vertcoin:vertcoin -R /home/vertcoin/.vertcoin
 	chmod 755 /etc/init.d/vertcoind
 	chmod 755 /etc/init.d/p2pool
 	systemctl daemon-reload
