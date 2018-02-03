@@ -91,7 +91,7 @@ while [ $continue != 1 ]; do
 		
 		skip=0
 		while [ $skip != 1 ]; do
-			read -p "Enter P2Pool Network 1 (<100MH/s) or 2 (>100MH/s) [1|2]: " NETWORK_TO_REPLACE			
+			read -p "Enter P2Pool Network 1 (>100MH/s) or 2 (<100MH/s) [1|2]: " NETWORK_TO_REPLACE			
 			if [ ! -z "$NETWORK_TO_REPLACE" ]; then
 				case "$NETWORK_TO_REPLACE" in
 					[1]|[2])
