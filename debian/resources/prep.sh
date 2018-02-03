@@ -12,6 +12,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 
 	#Vertcoin Install
 	cd /usr/src
+	rm -rf /usr/src/vertcoin
 	git clone https://github.com/vertcoin/vertcoin
 	BITCOIN_ROOT=/usr/src/vertcoin
 	# Pick some path to install BDB to, here we create a directory within the bitcoin directory
@@ -61,6 +62,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 	#P2pool
 	apt-get install -y python-zope.interface python-twisted python-twisted-web
 	cd /usr/src
+	rm -rf /usr/src/p2pool-vtc
 	git clone https://github.com/vertcoin/p2pool-vtc
 	cd p2pool-vtc
 	cd lyra2re-hash-python
@@ -73,22 +75,29 @@ if [ $INSTALL_TYPE = "i" ]; then
 
 	#P2pool GUI
 	cd /usr/src
+	rm -rf /usr/src/p2pool-ui-punchy
 	git clone https://github.com/justino/p2pool-ui-punchy
+	rm -rf /usr/src/p2pool-vtc/web-static
 	cp -R p2pool-ui-punchy/* /usr/src/p2pool-vtc/web-static/ 
+	
+	#Vertcoind
+	rm -rf /usr/bin/vertcoind
 	cp /usr/src/vertcoin/src/vertcoind /usr/bin/vertcoind
 
 	#Vertcoind service
 	rm /etc/init.d/vertcoind
 	touch /etc/init.d/vertcoind
 	chmod a+x /etc/init.d/vertcoind
-	update-rc.d vertcoind defaults 
-	cp cp /usr/src/vertcoin-p2pool-install.sh/resources/init.d/vertcoind /etc/init.d/vertcoind
+	update-rc.d vertcoind defaults
+	rm /etc/init.d/vertcoind
+	cp /usr/src/vertcoin-p2pool-install.sh/resources/init.d/vertcoind /etc/init.d/vertcoind
 
 	#P2pool service
 	rm /etc/init.d/p2pool
 	touch /etc/init.d/p2pool
 	chmod a+x /etc/init.d/p2pool
 	update-rc.d p2pool defaults 
+	rm /etc/init.d/p2pool
 	cp cp /usr/src/vertcoin-p2pool-install.sh/resources/init.d/p2pool /etc/init.d/p2pool
 	sed -i "s/MAX_CONNS_TO_REPLACE/${MAX_CONNS_TO_REPLACE}/" /etc/init.d/p2pool
 	sed -i "s/OUTGOING_CONNS_TO_REPLACE/${OUTGOING_CONNS_TO_REPLACE}/" /etc/init.d/p2pool
