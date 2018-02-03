@@ -127,7 +127,7 @@ while [ $continue != 1 ]; do
 		skip=0
 		while [ $skip != 1 ]; do
 			read -p "Enter your P2Pool fee percentage (default 1) [0-50]: " FEE_TO_REPLACE
-			if [ ! -z "$FEE_TO_REPLACE" -a "$FEE_TO_REPLACE" -le 51 ]; then
+			if [ ! -z "$FEE_TO_REPLACE" -a "$FEE_TO_REPLACE" -ge 0 -a "$FEE_TO_REPLACE" -le 51 ]; then
 				skip=1
 			else
 				echo "Please try again."
@@ -138,7 +138,7 @@ while [ $continue != 1 ]; do
 		skip=0
 		while [ $skip != 1 ]; do
 			read -p "Enter your P2Pool donation percentage (default 1) [0-50]: " DONATION_TO_REPLACE
-			if [ ! -z "$DONATION_TO_REPLACE" -a "$DONATION_TO_REPLACE" -le 51 ]; then
+			if [ ! -z "$DONATION_TO_REPLACE" -a "$DONATION_TO_REPLACE" -ge 0 -a "$DONATION_TO_REPLACE" -le 51 ]; then
 				skip=1
 			else
 				echo "Please try again."
