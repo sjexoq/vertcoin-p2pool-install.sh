@@ -60,7 +60,7 @@ if [ $os_check = 'Raspbian' ]; then
 	os_check="Debian"
 fi
 if [ $os_check = 'Debian' ]; then
-	if [ $check_major_release -ge 8 ]; then
+	if [ $check_major_release = 8 ]; then
 		if [ `id -u` != 0 ] ; then
 		  echo "Please run as root."
 		  exit
@@ -82,7 +82,7 @@ if [ $os_check = 'Debian' ]; then
 		cd /usr/src/vertcoin-p2pool-install.sh/debian
 		./install.sh $@
 	else
-		error "Although you are running $real_os we require version >= 8"
+		error "Although you are running $real_os we require version 8"
 		os_unsupported
 	fi
 else
