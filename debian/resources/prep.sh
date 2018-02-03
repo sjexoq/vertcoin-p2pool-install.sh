@@ -98,7 +98,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 	chmod a+x /etc/init.d/p2pool
 	update-rc.d p2pool defaults 
 	rm /etc/init.d/p2pool
-	cp cp /usr/src/vertcoin-p2pool-install.sh/resources/init.d/p2pool /etc/init.d/p2pool
+	cp /usr/src/vertcoin-p2pool-install.sh/resources/init.d/p2pool /etc/init.d/p2pool
 	sed -i "s/MAX_CONNS_TO_REPLACE/${MAX_CONNS_TO_REPLACE}/" /etc/init.d/p2pool
 	sed -i "s/OUTGOING_CONNS_TO_REPLACE/${OUTGOING_CONNS_TO_REPLACE}/" /etc/init.d/p2pool
 	sed -i "s/NETWORK_TO_REPLACE/${NETWORK_TO_REPLACE}/" /etc/init.d/p2pool
