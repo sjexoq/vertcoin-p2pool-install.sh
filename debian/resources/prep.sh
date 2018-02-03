@@ -105,6 +105,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 	sed -i "s/FEE_DESTINATION_TO_REPLACE/${FEE_DESTINATION_TO_REPLACE}/" /etc/init.d/p2pool
 	sed -i "s/FEE_TO_REPLACE/${FEE_TO_REPLACE}/" /etc/init.d/p2pool
 	sed -i "s/DONATION_TO_REPLACE/${DONATION_TO_REPLACE}/" /etc/init.d/p2pool
+	sed -i "s/VERTCOIN_RPC_PASSWORD_TO_REPLACE/${VERTCOIN_RPC_PASSWORD}/" /etc/init.d/p2pool
 	chown vertcoin:vertcoin -R /usr/src/p2pool-vtc
 	chown vertcoin:vertcoin -R /usr/bin/vertcoind
 	chown vertcoin:vertcoin -R /home/vertcoin/.vertcoin
