@@ -11,7 +11,7 @@ iptables -A INPUT -p tcp --dport 9171 -j ACCEPT
 iptables -A INPUT -p tcp --dport 9181 -j ACCEPT
 iptables -A INPUT -p tcp --dport 9346 -j ACCEPT
 iptables -A INPUT -p tcp --dport 9347 -j ACCEPT
-if [ $IPTABLES_SSH = "1" ]; then
+if [ $IPTABLES_SSH = "y" ]; then
 	iptables -A INPUT -p tcp --dport 22 -j ACCEPT -s ${REMOTE_IP}
 else
 	iptables -A INPUT -p tcp --dport 22 -j ACCEPT
