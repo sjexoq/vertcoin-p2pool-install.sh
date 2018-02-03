@@ -70,7 +70,7 @@ while [ $continue != 1 ]; do
 		skip=0
 		while [ $skip != 1 ]; do
 			read -p "Enter P2Pool Max Incoming Connections (default 40) [2-200]: " MAX_CONNS_TO_REPLACE
-			if [ ! -z "$MAX_CONNS_TO_REPLACE" -a "$MAX_CONNS_TO_REPLACE" -ge 1 -a "$MAX_CONNS_TO_REPLACE" -le 201 ]; then
+			if [ ! -z "$MAX_CONNS_TO_REPLACE" -a "$MAX_CONNS_TO_REPLACE" -ge 2 -a "$MAX_CONNS_TO_REPLACE" -le 200 ]; then
 				skip=1
 			else
 				echo "Please try again."
@@ -81,7 +81,7 @@ while [ $continue != 1 ]; do
 		skip=0
 		while [ $skip != 1 ]; do
 			read -p "Enter P2Pool Max Outgoing Connections (default 6) [2-10]: " OUTGOING_CONNS_TO_REPLACE
-			if [ ! -z "$OUTGOING_CONNS_TO_REPLACE" -a "$OUTGOING_CONNS_TO_REPLACE" -ge 1 -a "$OUTGOING_CONNS_TO_REPLACE" -le 11 ]; then
+			if [ ! -z "$OUTGOING_CONNS_TO_REPLACE" -a "$OUTGOING_CONNS_TO_REPLACE" -ge 2 -a "$OUTGOING_CONNS_TO_REPLACE" -le 10 ]; then
 				skip=1
 			else
 				echo "Please try again."
@@ -107,6 +107,11 @@ while [ $continue != 1 ]; do
 				skip=0
 			fi
 		done
+		if [ $NETWORK_TO_REPLACE = 1 ]; then
+			NETWORK_TO_REPLACE="vertcoin"
+		else
+			NETWORK_TO_REPLACE="vertcoin2"
+		fi
 		
 		skip=0
 		while [ $skip != 1 ]; do
