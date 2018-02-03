@@ -1,0 +1,29 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          p2pool
+# Required-Start:    $local_fs $remote_fs $network $time
+# Required-Stop:     $local_fs $remote_fs $network $time
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: p2pool
+### END INIT INFO
+start() {
+        echo "starting p2pool"
+        /sbin/runuser -l vertcoin -c '/usr/bin/screen -L -S p2pool -m -d /usr/bin/python /usr/src/p2pool-vtc/run_p2pool.py --max-conns MAX_CONNS_TO_REPLACE --outgoing-conns OUTGOING_CONNS_TO_REPLACE --net NETWORK_TO_REPLACE -a FEE_DESTINATION_TO_REPLACE --irc-announce --p2pool-port 9346 -f FEE_TO_REPLACE --give-author DONATION_TO_REPLACE --bitcoind-address 127.0.0.1 --bitcoind-rpc-port 5899 --bitcoind-p2p-port 5889 vertcoinuser VERTCOIN_RPC_PASSWORD_TO_REPLACE'
+        sleep 5
+        echo "p2pool started with PID of $(ps fax | grep p2pool | grep -v grep | head -1 | awk '{print $1}')"
+        echo "started p2pool ["$(tput setaf 2)OK$(tput sgr0)"]"
+}
+stop() {
+        echo "stopping p2pool"
+        /sbin/runuser -l vertcoin -c '/usr/bin/screen -X -S p2pool quit'
+        sleep 2
+        echo "p2pool stopped ["$(tput setaf 2)OK$(tput sgr0)"]"
+}
+case "$1" in
+        start) start ;;
+        stop)  stop;;
+        *) echo "usage $0 start|stop" >&2
+                exit 1
+                ;;
+esac
