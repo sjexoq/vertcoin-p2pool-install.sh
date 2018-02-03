@@ -26,7 +26,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 	echo "   Vertcoin User Password: ${VERTCOIN_USER_PASSWORD}"
 	echo "   Vertcoin RPC Password: ${VERTCOIN_RPC_PASSWORD}"
 	echo ""
-	if [ $IPTABLES_SSH = "1" ]; then
+	if [ $IPTABLES_SSH = "y" ]; then
 		echo "   Remote SSH Access Restricted to: ${REMOTE_IP}"
 	else
 		echo "   Remote SSH Access is open, please make sure any users for this system are using a secure password!"
