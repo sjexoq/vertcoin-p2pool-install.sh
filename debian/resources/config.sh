@@ -24,6 +24,7 @@ while [ $continue != 1 ]; do
 			skip=0
 		fi
 	done
+	continue=1
 	
 done
 	
@@ -139,7 +140,7 @@ while [ $continue != 1 ]; do
 				skip=0
 			fi
 		done
-		
+		continue=1
 	fi
 done
 
