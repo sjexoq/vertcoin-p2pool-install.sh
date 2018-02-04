@@ -21,15 +21,15 @@ Ports
 --------------------------------------
 The following public TCP ports must be open\forwarded on your firewall to the Vertcoin\P2Pool node:
 
-- 5889
+- 5889 (Vertcoin)
 
-9171
+- 9171 (P2Pool network 1)
 
-9181
+- 9346 (P2Pool network 1)
 
-9346
+- 9181 (P2Pool network 2)
 
-9347
+- 9347 (P2Pool network 2)
 
 Donations
 --------------------------------------
