@@ -20,11 +20,16 @@ Once installation has completed, make a note of any passwords and directories.
 Ports
 --------------------------------------
 The following public TCP ports must be open\forwarded on your firewall to the Vertcoin\P2Pool node:
--5889
--9171
--9181
--9346
--9347
+
+- 5889
+
+9171
+
+9181
+
+9346
+
+9347
 
 Donations
 --------------------------------------
