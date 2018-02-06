@@ -17,7 +17,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 	#Vertcoin Install
 	cd /usr/src
 	rm -rf /usr/src/vertcoin
-	git clone https://github.com/vertcoin/vertcoin
+	git clone https://github.com/vertcoin-project/vertcoin-core
 	BITCOIN_ROOT=/usr/src/vertcoin
 	# Pick some path to install BDB to, here we create a directory within the bitcoin directory
 	BDB_PREFIX="${BITCOIN_ROOT}/db4"
@@ -68,7 +68,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 	apt-get install -y python-zope.interface python-twisted python-twisted-web
 	cd /usr/src
 	rm -rf /usr/src/p2pool-vtc
-	git clone https://github.com/vertcoin/p2pool-vtc
+	git clone https://github.com/vertcoin-project/p2pool-vtc
 	cd p2pool-vtc
 	cd lyra2re-hash-python
 	git submodule init
@@ -145,6 +145,7 @@ if [ $INSTALL_TYPE = "u" ]; then
 	
 	#Vertcoin
 	cd /usr/src/vertcoin
+	git remote set-url origin https://github.com/vertcoin-project/vertcoin-core
 	git pull
 	BITCOIN_ROOT=/usr/src/vertcoin
 	# Pick some path to install BDB to, here we create a directory within the bitcoin directory
@@ -169,6 +170,7 @@ if [ $INSTALL_TYPE = "u" ]; then
 	
 	#P2pool
 	cd /usr/src/p2pool-vtc
+	git remote set-url origin https://github.com/vertcoin-project/p2pool-vtc
 	git pull
 	cd lyra2re-hash-python
 	git submodule init
