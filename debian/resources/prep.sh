@@ -16,9 +16,9 @@ if [ $INSTALL_TYPE = "i" ]; then
 
 	#Vertcoin Install
 	cd /usr/src
-	rm -rf /usr/src/vertcoin
+	rm -rf /usr/src/vertcoin-core
 	git clone https://github.com/vertcoin-project/vertcoin-core
-	BITCOIN_ROOT=/usr/src/vertcoin
+	BITCOIN_ROOT=/usr/src/vertcoin-core
 	# Pick some path to install BDB to, here we create a directory within the bitcoin directory
 	BDB_PREFIX="${BITCOIN_ROOT}/db4"
 	mkdir -p $BDB_PREFIX
@@ -87,7 +87,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 	
 	#Vertcoind
 	rm -rf /usr/bin/vertcoind
-	cp /usr/src/vertcoin/src/vertcoind /usr/bin/vertcoind
+	cp /usr/src/vertcoin-core/src/vertcoind /usr/bin/vertcoind
 
 	#Vertcoind service
 	rm /etc/init.d/vertcoind
@@ -144,7 +144,7 @@ if [ $INSTALL_TYPE = "u" ]; then
 	service vertcoind stop
 	
 	#Vertcoin
-	cd /usr/src/vertcoin
+	cd /usr/src/vertcoin-core
 	git remote set-url origin https://github.com/vertcoin-project/vertcoin-core
 	git pull
 	BITCOIN_ROOT=/usr/src/vertcoin
@@ -185,7 +185,7 @@ if [ $INSTALL_TYPE = "u" ]; then
 	
 	#Vertcoin
 	rm -rf /usr/bin/vertcoind
-	cp /usr/src/vertcoin/src/vertcoind /usr/bin/vertcoind
+	cp /usr/src/vertcoin-core/src/vertcoind /usr/bin/vertcoind
 	
 	service vertcoind start
 	service p2pool start
