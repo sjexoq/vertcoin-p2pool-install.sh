@@ -155,7 +155,7 @@ if [ $INSTALL_TYPE = "u" ]; then
 	echo "Stopping Vertcoind and P2Pool...'
 	sleep 10
 	echo "Stopping Vertcoind and P2Pool....'
-	pidofp2pool = pidof p2pool
+	pidofp2pool = pidof python
 	if [ ! -z "$pidofp2pool" ]; then
 		kill -9 pidofp2pool
 	fi
