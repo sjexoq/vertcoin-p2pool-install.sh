@@ -144,17 +144,17 @@ fi
 
 if [ $INSTALL_TYPE = "u" ]; then
 
-	echo "Stopping Vertcoind and P2Pool'
+	echo "Stopping Vertcoind and P2Pool\n"
 	service p2pool stop
 	service vertcoind stop
 	sleep 10
-	echo "Stopping Vertcoind and P2Pool.'
+	echo "Stopping Vertcoind and P2Pool.\n"
 	sleep 10
-	echo "Stopping Vertcoind and P2Pool..'
+	echo "Stopping Vertcoind and P2Pool..\n"
 	sleep 10
-	echo "Stopping Vertcoind and P2Pool...'
+	echo "Stopping Vertcoind and P2Pool...\n"
 	sleep 10
-	echo "Stopping Vertcoind and P2Pool....'
+	echo "Stopping Vertcoind and P2Pool....\n"
 	pidofp2pool = pidof python
 	if [ ! -z "$pidofp2pool" ]; then
 		kill -9 pidofp2pool
@@ -164,7 +164,7 @@ if [ $INSTALL_TYPE = "u" ]; then
 		kill -9 pidofvertcoind
 	fi
 	sleep 10
-	echo "Preparing Upgrade'
+	echo "Preparing Upgrade\n"
 	
 	#Vertcoin
 	cd /usr/src/vertcoin-core
