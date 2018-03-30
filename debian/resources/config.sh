@@ -146,22 +146,24 @@ while [ $continue != 1 ]; do
 			fi
 		done
 		continue=1
+		
+		#generate a random password
+		VERTCOIN_USER_PASSWORD=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+		VERTCOIN_RPC_PASSWORD=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+
+		echo "Exporting Install Variables Only"
+		export IPTABLES_SSH=$IPTABLES_SSH
+		export REMOTE_IP=$REMOTE_IP
+		export MAX_CONNS_TO_REPLACE=$MAX_CONNS_TO_REPLACE
+		export OUTGOING_CONNS_TO_REPLACE=$OUTGOING_CONNS_TO_REPLACE
+		export NETWORK_TO_REPLACE=$NETWORK_TO_REPLACE
+		export FEE_DESTINATION_TO_REPLACE=$FEE_DESTINATION_TO_REPLACE
+		export FEE_TO_REPLACE=$FEE_TO_REPLACE
+		export DONATION_TO_REPLACE=$DONATION_TO_REPLACE
+		export VERTCOIN_USER_PASSWORD=$VERTCOIN_USER_PASSWORD
+		export VERTCOIN_RPC_PASSWORD=$VERTCOIN_RPC_PASSWORD
+
 	fi
 done
-
-#generate a random password
-VERTCOIN_USER_PASSWORD=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-VERTCOIN_RPC_PASSWORD=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-
-echo "Exporting Variables"
+echo "Exporting Other Variables"
 export INSTALL_TYPE=$INSTALL_TYPE
-export IPTABLES_SSH=$IPTABLES_SSH
-export REMOTE_IP=$REMOTE_IP
-export MAX_CONNS_TO_REPLACE=$MAX_CONNS_TO_REPLACE
-export OUTGOING_CONNS_TO_REPLACE=$OUTGOING_CONNS_TO_REPLACE
-export NETWORK_TO_REPLACE=$NETWORK_TO_REPLACE
-export FEE_DESTINATION_TO_REPLACE=$FEE_DESTINATION_TO_REPLACE
-export FEE_TO_REPLACE=$FEE_TO_REPLACE
-export DONATION_TO_REPLACE=$DONATION_TO_REPLACE
-export VERTCOIN_USER_PASSWORD=$VERTCOIN_USER_PASSWORD
-export VERTCOIN_RPC_PASSWORD=$VERTCOIN_RPC_PASSWORD
