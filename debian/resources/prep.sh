@@ -204,10 +204,11 @@ if [ $INSTALL_TYPE = "u" ]; then
 	git submodule update
 	python setup.py install
 	
-	#P2Pool GUI
-	cd /usr/src/p2pool-ui-punchy
-	git pull
-	rm -rf /usr/src/p2pool-vtc/web-static/
+	#P2pool GUI
+	cd /usr/src
+	rm -rf /usr/src/p2pool-ui-punchy
+	git clone https://github.com/justino/p2pool-ui-punchy
+	rm -rf /usr/src/p2pool-vtc/web-static
 	mkdir /usr/src/p2pool-vtc/web-static
 	cp -R p2pool-ui-punchy/* /usr/src/p2pool-vtc/web-static/
 	chown vertcoin:vertcoin -R /usr/src/p2pool-vtc
