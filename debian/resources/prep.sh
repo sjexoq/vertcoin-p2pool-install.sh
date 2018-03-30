@@ -155,14 +155,18 @@ if [ $INSTALL_TYPE = "u" ]; then
 	echo "Stopping Vertcoind and P2Pool...\n"
 	sleep 10
 	echo "Stopping Vertcoind and P2Pool....\n"
-	pidofp2pool = pidof python
-	if [ ! -z "$pidofp2pool" ]; then
-		kill -9 pidofp2pool
-	fi
-	pidofvertcoind = pidof vertcoind
-	if [ ! -z "$pidofvertcoind" ]; then
-		kill -9 pidofvertcoind
-	fi
+	pidofp2pool=$(pidof -o %PPID python)
+	for p in $pidofp2pool
+	do
+	  echo "Killing $p..."
+	  kill -TERM $p
+	done
+	pidofvertcoind=$(pidof -o %PPID vertcoind)
+	for p in $pidofvertcoind
+	do
+	  echo "Killing $p..."
+	  kill -TERM $p
+	done
 	sleep 10
 	echo "Preparing Upgrade\n"
 	
