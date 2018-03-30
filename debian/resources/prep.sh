@@ -119,6 +119,8 @@ if [ $INSTALL_TYPE = "i" ]; then
 	chmod 755 /etc/init.d/vertcoind
 	chmod 755 /etc/init.d/p2pool
 	systemctl daemon-reload
+	echo "Starting Vertcoind and P2Pool'
+	echo "Please be patient, Vertcoind may take a few hours to sync the blockchain, during this time P2Pool will not be available.'
 	service vertcoind start
 	service p2pool start
 
@@ -142,8 +144,27 @@ fi
 
 if [ $INSTALL_TYPE = "u" ]; then
 
+	echo "Stopping Vertcoind and P2Pool'
 	service p2pool stop
 	service vertcoind stop
+	sleep 10
+	echo "Stopping Vertcoind and P2Pool.'
+	sleep 10
+	echo "Stopping Vertcoind and P2Pool..'
+	sleep 10
+	echo "Stopping Vertcoind and P2Pool...'
+	sleep 10
+	echo "Stopping Vertcoind and P2Pool....'
+	pidofp2pool = pidof p2pool
+	if [ ! -z "$pidofp2pool" ]; then
+		kill -9 pidofp2pool
+	fi
+	pidofvertcoind = pidof vertcoind
+	if [ ! -z "$pidofvertcoind" ]; then
+		kill -9 pidofvertcoind
+	fi
+	sleep 10
+	echo "Preparing Upgrade'
 	
 	#Vertcoin
 	cd /usr/src/vertcoin-core
@@ -191,6 +212,8 @@ if [ $INSTALL_TYPE = "u" ]; then
 	rm -rf /usr/bin/vertcoind
 	cp /usr/src/vertcoin-core/src/vertcoind /usr/bin/vertcoind
 	
+	echo "Starting Vertcoind and P2Pool'
+	echo "Please be patient, Vertcoind may take a few hours to sync the blockchain, during this time P2Pool will not be available.'
 	service vertcoind start
 	service p2pool start
 
