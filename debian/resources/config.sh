@@ -145,7 +145,6 @@ while [ $continue != 1 ]; do
 				skip=0
 			fi
 		done
-		continue=1
 		
 		#generate a random password
 		VERTCOIN_USER_PASSWORD=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
@@ -164,6 +163,7 @@ while [ $continue != 1 ]; do
 		export VERTCOIN_RPC_PASSWORD=$VERTCOIN_RPC_PASSWORD
 
 	fi
+	continue=1
 done
 echo "Exporting Other Variables"
 export INSTALL_TYPE=$INSTALL_TYPE
