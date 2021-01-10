@@ -8,7 +8,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 	#install dependencies
 	echo 'Installing dependencies'
 	apt-get install -y build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 libboost-all-dev git
-	apt-get install -y libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
+	apt-get install -y libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev libgmp-dev
 
 	#Stop service if already running
 	service p2pool stop
@@ -33,9 +33,11 @@ if [ $INSTALL_TYPE = "i" ]; then
 	../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 	make install
 	# Configure Bitcoin Core to use our own-built instance of BDB
+	cp -rf ${BITCOIN_ROOT}/db4/lib/* /usr/lib
+	cp -rf ${BITCOIN_ROOT}/db4/include/* /usr/include
 	cd $BITCOIN_ROOT
 	./autogen.sh
-	./configure LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/" --without-gui
+	./configure LDFLAGS="-L/usr/lib/x86_64-linux-gnu -lboost_system" --without-gui
 	make
 	make install
 
