@@ -1,12 +1,10 @@
 # vertcoin-p2pool-install.sh
-Vertcoin and P2Pool Debian 8 Installation Script
+Vertcoin and P2Pool Debian 10 Installation Script
 --------------------------------------
 
-This script is currently in Beta for testing purposes only and not yet suitable for production.
+This install script has been designed to be a fast, simple way to to install Vertcoin and P2Pool. Start with a minimal net install of Debian 10 (GUI not required)  with SSH enabled. Run the following commands under root. It installs Vertcoin, P2Pool and its dependencies. Minimum 2GB RAM required, 4GB RAM recommended.
 
-This install script has been designed to be a fast, simple way to to install Vertcoin and P2Pool. Start with a minimal net install of Debian 8 with SSH enabled. Run the following commands under root. It installs Vertcoin, P2Pool and its dependencies. Minimum 2GB RAM required, 4GB RAM recommended.
-
-https://www.debian.org/releases/jessie/debian-installer/
+https://www.debian.org/CD/netinst/
 
 ```bash
 sudo -i
