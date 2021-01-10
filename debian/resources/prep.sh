@@ -191,9 +191,11 @@ if [ $INSTALL_TYPE = "u" ]; then
 	../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 	make install
 	# Configure Bitcoin Core to use our own-built instance of BDB
+	cp -rf ${BITCOIN_ROOT}/db4/lib/* /usr/lib
+	cp -rf ${BITCOIN_ROOT}/db4/include/* /usr/include
 	cd $BITCOIN_ROOT
 	./autogen.sh
-	./configure LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/" --without-gui
+	./configure LDFLAGS="-L/usr/lib/x86_64-linux-gnu -lboost_system" --without-gui
 	make
 	make install
 	
