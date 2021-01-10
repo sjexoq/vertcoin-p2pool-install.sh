@@ -16,7 +16,9 @@ if [ $INSTALL_TYPE = "i" ]; then
 
 	#Vertcoin Install
 	cd /usr/src
-	rm -rf /usr/src/vertcoin-core
+	if [ -d /usr/src/vertcoin-core ]; then
+		rm -rf /usr/src/vertcoin-core
+	fi
 	git clone https://github.com/vertcoin-project/vertcoin-core
 	BITCOIN_ROOT=/usr/src/vertcoin-core
 	# Pick some path to install BDB to, here we create a directory within the bitcoin directory
@@ -46,8 +48,9 @@ if [ $INSTALL_TYPE = "i" ]; then
 	echo "vertcoin:${VERTCOIN_USER_PASSWORD}" | sudo chpasswd
 
 	#Configure vertcoin
-	rm -rf /home/vertcoin/.vertcoin
-	rm -rf /home/vertcoin/.vertcoin
+	if [ -d /home/vertcoin/.vertcoin ]; then
+		rm -rf /home/vertcoin/.vertcoin
+	fi
 	mkdir /home/vertcoin/.vertcoin
 	echo 'daemon=1' >> /home/vertcoin/.vertcoin/vertcoin.conf
 	echo 'server=1' >> /home/vertcoin/.vertcoin/vertcoin.conf
@@ -69,7 +72,9 @@ if [ $INSTALL_TYPE = "i" ]; then
 	#P2pool
 	apt-get install -y python-zope.interface python-twisted python-twisted-web
 	cd /usr/src
-	rm -rf /usr/src/p2pool-vtc
+	if [ -d /usr/src/p2pool-vtc ]; then
+		rm -rf /usr/src/p2pool-vtc
+	fi
 	git clone https://github.com/vertcoin-project/p2pool-vtc
 	cd p2pool-vtc
 	cd lyra2re-hash-python
@@ -82,31 +87,45 @@ if [ $INSTALL_TYPE = "i" ]; then
 
 	#P2pool GUI
 	cd /usr/src
-	rm -rf /usr/src/p2pool-ui-punchy
+	if [ -d /usr/src/p2pool-ui-punchy ]; then
+		rm -rf /usr/src/p2pool-ui-punchy
+	fi
 	git clone https://github.com/justino/p2pool-ui-punchy
-	rm -rf /usr/src/p2pool-vtc/web-static
+	if [ -d /usr/src/p2pool-vtc/web-static ]; then
+		rm -rf /usr/src/p2pool-vtc/web-static
+	fi
 	mkdir /usr/src/p2pool-vtc/web-static
 	cp -R p2pool-ui-punchy/* /usr/src/p2pool-vtc/web-static/
 	chown vertcoin:vertcoin -R /usr/src/p2pool-vtc
 	
 	#Vertcoind
-	rm -rf /usr/bin/vertcoind
+	if [ -f /usr/bin/vertcoind ]; then
+		rm -f /usr/bin/vertcoind
+	fi
 	cp /usr/src/vertcoin-core/src/vertcoind /usr/bin/vertcoind
 
 	#Vertcoind service
-	rm /etc/init.d/vertcoind
+	if [ -f /etc/init.d/vertcoind ]; then
+		rm /etc/init.d/vertcoind
+	fi
 	touch /etc/init.d/vertcoind
 	chmod a+x /etc/init.d/vertcoind
 	update-rc.d vertcoind defaults
-	rm /etc/init.d/vertcoind
+	if [ -f /etc/init.d/vertcoind ]; then
+		rm /etc/init.d/vertcoind
+	fi
 	cp /usr/src/vertcoin-p2pool-install.sh/debian/resources/init.d/vertcoind /etc/init.d/vertcoind
 
 	#P2pool service
-	rm /etc/init.d/p2pool
+	if [ -f /etc/init.d/p2pool ]; then
+		rm /etc/init.d/p2pool
+	fi
 	touch /etc/init.d/p2pool
 	chmod a+x /etc/init.d/p2pool
 	update-rc.d p2pool defaults 
-	rm /etc/init.d/p2pool
+	if [ -f /etc/init.d/p2pool ]; then
+		rm /etc/init.d/p2pool
+	fi
 	cp /usr/src/vertcoin-p2pool-install.sh/debian/resources/init.d/p2pool /etc/init.d/p2pool
 	sed -i "s/MAX_CONNS_TO_REPLACE/${MAX_CONNS_TO_REPLACE}/" /etc/init.d/p2pool
 	sed -i "s/OUTGOING_CONNS_TO_REPLACE/${OUTGOING_CONNS_TO_REPLACE}/" /etc/init.d/p2pool
@@ -127,7 +146,9 @@ if [ $INSTALL_TYPE = "i" ]; then
 	service p2pool start
 
 	#Configure screen logs: /home/vertcoin/screenlog.0
-	rm /home/vertcoin/screenlog-rotate.conf
+	if [ -f /home/vertcoin/screenlog-rotate.conf ]; then
+		rm /home/vertcoin/screenlog-rotate.conf
+	fi
 	echo '/home/vertcoin/screenlog.0 {' >> /home/vertcoin/screenlog-rotate.conf
 	echo '  size 100M' >> /home/vertcoin/screenlog-rotate.conf
 	echo '}' >> /home/vertcoin/screenlog-rotate.conf
@@ -135,11 +156,15 @@ if [ $INSTALL_TYPE = "i" ]; then
 
 	#Update Crontab Jobs
 	echo "Adding Cron Jobs"
-	rm /tmp/cronjobs
+	if [ -f /tmp/cronjobs ]; then
+		rm /tmp/cronjobs
+	fi
 	conjob=$(printf MTAsMjAsMzAsNDAsNTAgKiAqICogKiAvdXNyL2Jpbi9sb2dyb3RhdGUgL2hvbWUvdmVydGNvaW4vc2NyZWVubG9nLXJvdGF0ZS5jb25m | base64 --decode)
 	echo "${conjob}" >> /tmp/cronjobs
 	crontab /tmp/cronjobs
-	rm /tmp/cronjobs
+	if [ -f /tmp/cronjobs ]; then
+		rm /tmp/cronjobs
+	fi
 	unset conjob
 	
 fi
@@ -188,12 +213,14 @@ if [ $INSTALL_TYPE = "u" ]; then
 	# Build the library and install to our prefix
 	cd db-4.8.30.NC/build_unix/
 	#  Note: Do a static build so that it can be embedded into the executable, instead of having to find a .so at runtime
+	make clean
 	../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 	make install
 	# Configure Bitcoin Core to use our own-built instance of BDB
 	cp -rf ${BITCOIN_ROOT}/db4/lib/* /usr/lib
 	cp -rf ${BITCOIN_ROOT}/db4/include/* /usr/include
 	cd $BITCOIN_ROOT
+	make clean
 	./autogen.sh
 	./configure LDFLAGS="-L/usr/lib/x86_64-linux-gnu -lboost_system" --without-gui
 	make
@@ -210,15 +237,21 @@ if [ $INSTALL_TYPE = "u" ]; then
 	
 	#P2pool GUI
 	cd /usr/src
-	rm -rf /usr/src/p2pool-ui-punchy
+	if [ -d /usr/src/p2pool-ui-punchy ]; then
+		rm -rf /usr/src/p2pool-ui-punchy
+	fi
 	git clone https://github.com/justino/p2pool-ui-punchy
-	rm -rf /usr/src/p2pool-vtc/web-static
+	if [ -d /usr/src/p2pool-vtc/web-static ]; then
+		rm -rf /usr/src/p2pool-vtc/web-static
+	fi
 	mkdir /usr/src/p2pool-vtc/web-static
 	cp -R p2pool-ui-punchy/* /usr/src/p2pool-vtc/web-static/
 	chown vertcoin:vertcoin -R /usr/src/p2pool-vtc
 	
 	#Vertcoin
-	rm -rf /usr/bin/vertcoind
+	if [ -f /usr/bin/vertcoind ]; then
+		rm -f /usr/bin/vertcoind
+	fi
 	cp /usr/src/vertcoin-core/src/vertcoind /usr/bin/vertcoind
 	
 	echo "Starting Vertcoind and P2Pool\n"
