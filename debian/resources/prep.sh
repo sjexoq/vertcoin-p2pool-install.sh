@@ -31,6 +31,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 	tar -xzvf db-4.8.30.NC.tar.gz
 	# Build the library and install to our prefix
 	cd db-4.8.30.NC/build_unix/
+	sed -i 's/\(__atomic_compare_exchange\)/\1_db/' /usr/src/db-4.8.30.NC/dbinc/atomic.h
 	#  Note: Do a static build so that it can be embedded into the executable, instead of having to find a .so at runtime
 	../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 	make install
