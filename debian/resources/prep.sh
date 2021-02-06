@@ -249,13 +249,9 @@ if [ $INSTALL_TYPE = "u" ]; then
 	make install
 	
 	#P2pool
-	apt-get install -y python-zope.interface python-twisted python-twisted-web
-	cd /usr/src
-	if [ -d /usr/src/p2pool-vtc ]; then
-		rm -rf /usr/src/p2pool-vtc
-	fi
-	git clone https://github.com/vertcoin-project/p2pool-vtc
-	cd p2pool-vtc
+	cd /usr/src/p2pool-vtc
+	git remote set-url origin https://github.com/vertcoin-project/p2pool-vtc
+	git pull
 	cd lyra2re-hash-python
 	git submodule init
 	git submodule update
@@ -264,6 +260,7 @@ if [ $INSTALL_TYPE = "u" ]; then
 	
 	#verthash-pospace
 	cd ..
+	rm -rf /usr/src/p2pool-vtc/verthash-pospace
 	git clone https://github.com/vertcoin-project/verthash-pospace
 	cd verthash-pospace
 	git pull --recurse-submodules --jobs=10
