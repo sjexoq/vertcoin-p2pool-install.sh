@@ -82,7 +82,27 @@ if [ $INSTALL_TYPE = "i" ]; then
 	cd lyra2re-hash-python
 	git submodule init
 	git submodule update
+	sed -i "s/from setuptools/from distutils.core/" /usr/src/p2pool-vtc/lyra2re-hash-python/setup.py
 	python setup.py install
+	
+	#verthash-pospace
+	cd ..
+	git clone https://github.com/vertcoin-project/verthash-pospace
+	cd verthash-pospace
+	git pull --recurse-submodules --jobs=10
+	git clone https://github.com/mjosaarinen/tiny_sha3 /usr/src/p2pool-vtc/verthash-pospace/tiny_sha3
+	make all
+	git submodule init
+	git submodule update
+	sed -i "s/from setuptools/from distutils.core/" /usr/src/p2pool-vtc/verthash-pospace/setup.py
+	
+	sed -i "s|vertcoin.dat|/home/vertcoin/.vertcoin/verthash.dat|" /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin.py
+	#cp /home/vertcoin/.vertcoin/verthash.dat /usr/src/p2pool-vtc/vertcoin.dat
+	
+	#Remove Testnet files
+	mv /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin_testnet.py /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin_testnet.py.OLD
+	mv /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin_testnet.pyc /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin_testnet.pyc.OLD
+	mv /usr/src/p2pool-vtc/p2pool/networks/vertcoin_testnet.py /usr/src/p2pool-vtc/p2pool/networks/vertcoin_testnet.py.OLD
 
 	#Install screen log
 	apt-get install -y screen
@@ -229,13 +249,37 @@ if [ $INSTALL_TYPE = "u" ]; then
 	make install
 	
 	#P2pool
-	cd /usr/src/p2pool-vtc
-	git remote set-url origin https://github.com/vertcoin-project/p2pool-vtc
-	git pull
+	apt-get install -y python-zope.interface python-twisted python-twisted-web
+	cd /usr/src
+	if [ -d /usr/src/p2pool-vtc ]; then
+		rm -rf /usr/src/p2pool-vtc
+	fi
+	git clone https://github.com/vertcoin-project/p2pool-vtc
+	cd p2pool-vtc
 	cd lyra2re-hash-python
 	git submodule init
 	git submodule update
+	sed -i "s/from setuptools/from distutils.core/" /usr/src/p2pool-vtc/lyra2re-hash-python/setup.py
 	python setup.py install
+	
+	#verthash-pospace
+	cd ..
+	git clone https://github.com/vertcoin-project/verthash-pospace
+	cd verthash-pospace
+	git pull --recurse-submodules --jobs=10
+	git clone https://github.com/mjosaarinen/tiny_sha3 /usr/src/p2pool-vtc/verthash-pospace/tiny_sha3
+	make all
+	git submodule init
+	git submodule update
+	sed -i "s/from setuptools/from distutils.core/" /usr/src/p2pool-vtc/verthash-pospace/setup.py
+	
+	sed -i "s|vertcoin.dat|/home/vertcoin/.vertcoin/verthash.dat|" /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin.py
+	#cp /home/vertcoin/.vertcoin/verthash.dat /usr/src/p2pool-vtc/vertcoin.dat
+	
+	#Remove Testnet files
+	mv /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin_testnet.py /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin_testnet.py.OLD
+	mv /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin_testnet.pyc /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin_testnet.pyc.OLD
+	mv /usr/src/p2pool-vtc/p2pool/networks/vertcoin_testnet.py /usr/src/p2pool-vtc/p2pool/networks/vertcoin_testnet.py.OLD
 	
 	#P2pool GUI
 	cd /usr/src
