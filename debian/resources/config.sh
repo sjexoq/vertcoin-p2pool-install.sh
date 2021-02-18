@@ -89,29 +89,31 @@ while [ $continue != 1 ]; do
 			fi
 		done
 		
-		skip=0
-		while [ $skip != 1 ]; do
-			read -p "Enter P2Pool Network 1 (>100MH/s) or 2 (<100MH/s) [1|2]: " NETWORK_TO_REPLACE			
-			if [ ! -z "$NETWORK_TO_REPLACE" ]; then
-				case "$NETWORK_TO_REPLACE" in
-					[1]|[2])
-					skip=1
-					;;
-					*)
-					echo "Please try again."
-					skip=0
-					;;
-				esac
-			else
-				echo "Please try again."
-				skip=0
-			fi
-		done
-		if [ $NETWORK_TO_REPLACE = 1 ]; then
-			NETWORK_TO_REPLACE="vertcoin"
-		else
-			NETWORK_TO_REPLACE="vertcoin2"
-		fi
+#		Currently there is no vertcoin2 network
+#		skip=0
+#		while [ $skip != 1 ]; do
+#			read -p "Enter P2Pool Network 1 (>100MH/s) or 2 (<100MH/s) [1|2]: " NETWORK_TO_REPLACE			
+#			if [ ! -z "$NETWORK_TO_REPLACE" ]; then
+#				case "$NETWORK_TO_REPLACE" in
+#					[1]|[2])
+#					skip=1
+#					;;
+#					*)
+#					echo "Please try again."
+#					skip=0
+#					;;
+#				esac
+#			else
+#				echo "Please try again."
+#				skip=0
+#			fi
+#		done
+#		if [ $NETWORK_TO_REPLACE = 1 ]; then
+#			NETWORK_TO_REPLACE="vertcoin"
+#		else
+#			NETWORK_TO_REPLACE="vertcoin2"
+#		fi
+		NETWORK_TO_REPLACE="vertcoin"
 		
 		skip=0
 		while [ $skip != 1 ]; do
