@@ -25,10 +25,6 @@ The following public TCP ports must be open\forwarded on your firewall to the Ve
 
 - 9346 (P2Pool network 1)
 
-- 9181 (P2Pool network 2)
-
-- 9347 (P2Pool network 2)
-
 Donations
 --------------------------------------
 SJExoQ: VTC VjWdJU5DwPQnent5sZdkwwdvHPTNLX7Wa6
