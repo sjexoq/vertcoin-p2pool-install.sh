@@ -137,6 +137,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 		rm /etc/init.d/vertcoind
 	fi
 	cp /usr/src/vertcoin-p2pool-install.sh/debian/resources/init.d/vertcoind /etc/init.d/vertcoind
+	/lib/systemd/systemd-sysv-install enable vertcoind
 
 	#P2pool service
 	if [ -f /etc/init.d/p2pool ]; then
@@ -144,11 +145,12 @@ if [ $INSTALL_TYPE = "i" ]; then
 	fi
 	touch /etc/init.d/p2pool
 	chmod a+x /etc/init.d/p2pool
-	update-rc.d p2pool defaults 
+	update-rc.d p2pool defaults
 	if [ -f /etc/init.d/p2pool ]; then
 		rm /etc/init.d/p2pool
 	fi
 	cp /usr/src/vertcoin-p2pool-install.sh/debian/resources/init.d/p2pool /etc/init.d/p2pool
+	/lib/systemd/systemd-sysv-install enable p2pool
 	sed -i "s/MAX_CONNS_TO_REPLACE/${MAX_CONNS_TO_REPLACE}/" /etc/init.d/p2pool
 	sed -i "s/OUTGOING_CONNS_TO_REPLACE/${OUTGOING_CONNS_TO_REPLACE}/" /etc/init.d/p2pool
 	sed -i "s/NETWORK_TO_REPLACE/${NETWORK_TO_REPLACE}/" /etc/init.d/p2pool
