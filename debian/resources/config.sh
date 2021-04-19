@@ -137,16 +137,16 @@ while [ $continue != 1 ]; do
 			fi
 		done
 		
-		skip=0
-		while [ $skip != 1 ]; do
-			read -p "Enter your P2Pool donation percentage (default 1) [0-50]: " DONATION_TO_REPLACE
-			if [ ! -z "$DONATION_TO_REPLACE" -a "$DONATION_TO_REPLACE" -ge 0 -a "$DONATION_TO_REPLACE" -le 51 ]; then
-				skip=1
-			else
-				echo "Please try again."
-				skip=0
-			fi
-		done
+		#skip=0
+		#while [ $skip != 1 ]; do
+		#	read -p "Enter your P2Pool donation percentage (default 1) [0-50]: " DONATION_TO_REPLACE
+		#	if [ ! -z "$DONATION_TO_REPLACE" -a "$DONATION_TO_REPLACE" -ge 0 -a "$DONATION_TO_REPLACE" -le 51 ]; then
+		#		skip=1
+		#	else
+		#		echo "Please try again."
+		#		skip=0
+		#	fi
+		#done
 		
 		#generate a random password
 		VERTCOIN_USER_PASSWORD=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64 | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
@@ -160,7 +160,7 @@ while [ $continue != 1 ]; do
 		export NETWORK_TO_REPLACE=$NETWORK_TO_REPLACE
 		export FEE_DESTINATION_TO_REPLACE=$FEE_DESTINATION_TO_REPLACE
 		export FEE_TO_REPLACE=$FEE_TO_REPLACE
-		export DONATION_TO_REPLACE=$DONATION_TO_REPLACE
+		#export DONATION_TO_REPLACE=$DONATION_TO_REPLACE
 		export VERTCOIN_USER_PASSWORD=$VERTCOIN_USER_PASSWORD
 		export VERTCOIN_RPC_PASSWORD=$VERTCOIN_RPC_PASSWORD
 
