@@ -9,7 +9,7 @@
 ### END INIT INFO
 start() {
         echo "starting p2pool"
-        /sbin/runuser -l vertcoin -c '/usr/bin/screen -L -S p2pool -m -d /usr/bin/python /usr/src/p2pool-vtc/run_p2pool.py --max-conns MAX_CONNS_TO_REPLACE --outgoing-conns OUTGOING_CONNS_TO_REPLACE --net NETWORK_TO_REPLACE -a FEE_DESTINATION_TO_REPLACE --irc-announce --p2pool-port 9346 -f FEE_TO_REPLACE --give-author DONATION_TO_REPLACE --bitcoind-address 127.0.0.1 --bitcoind-rpc-port 5899 --bitcoind-p2p-port 5889 vertcoinuser VERTCOIN_RPC_PASSWORD_TO_REPLACE'
+        /sbin/runuser -l vertcoin -c '/usr/bin/screen -L -S p2pool -m -d /usr/bin/python /usr/src/p2pool-vtc/run_p2pool.py --max-conns MAX_CONNS_TO_REPLACE --outgoing-conns OUTGOING_CONNS_TO_REPLACE --net NETWORK_TO_REPLACE -a FEE_DESTINATION_TO_REPLACE --irc-announce --p2pool-port 9346 -f FEE_TO_REPLACE --bitcoind-address 127.0.0.1 --bitcoind-rpc-port 5899 --bitcoind-p2p-port 5889 vertcoinuser VERTCOIN_RPC_PASSWORD_TO_REPLACE'
         sleep 5
         echo "p2pool started with PID of $(ps fax | grep p2pool | grep -v grep | head -1 | awk '{print $1}')"
         echo "started p2pool ["$(tput setaf 2)OK$(tput sgr0)"]"
