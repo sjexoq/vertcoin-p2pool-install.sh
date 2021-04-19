@@ -96,7 +96,7 @@ if [ $INSTALL_TYPE = "i" ]; then
 	git submodule update
 	sed -i "s/from setuptools/from distutils.core/" /usr/src/p2pool-vtc/verthash-pospace/setup.py
 	
-	sed -i "s|verthash.dat|/home/vertcoin/.vertcoin/verthash.dat|" /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin.py
+	sed -i "s|open('verthash.dat|open('/home/vertcoin/.vertcoin/verthash.dat|" /usr/src/p2pool-vtc/p2pool/bitcoin/networks/vertcoin.py
 	#cp /home/vertcoin/.vertcoin/verthash.dat /usr/src/p2pool-vtc/vertcoin.dat
 	
 	#Remove Testnet files
